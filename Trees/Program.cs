@@ -14,6 +14,7 @@
             tree.Insert(35);
             tree.Insert(3);
             tree.Insert(1);
+            tree.Insert(24);
             Console.WriteLine(tree.DoesValueExist(3));
             Console.WriteLine(tree.DoesValueExist(9));
         }

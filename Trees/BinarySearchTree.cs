@@ -12,16 +12,51 @@ namespace Trees
         private Node<int>? Root;
         private int Count = 0;
 
-        public bool DoesValueExist(int valueToFind)
+        public void DeleteNode(int valueToDelete)
+        {
+            (var valueExist, var node, var priorNode) = DoesValueExist(valueToDelete);
+            if (!valueExist) return;
+
+            // Run the delete logic
+            if (node.Left != null)
+            {
+                // head down the left hand side - grab the largest value
+                var secondLargestNode = node.Left;
+
+                if (secondLargestNode.Right == null)
+                {
+                    // If there are no right hand note then we know we reached the largest node
+                }
+
+                while (secondLargestNode.Right.Right != null)
+                {
+                    secondLargestNode = secondLargestNode.Right;
+                }
+
+                node.Data = secondLargestNode.Right.Data;
+                secondLargestNode.Right = null;
+            }
+            else if (node.Right != null)
+            {
+                // head down the right hand side - grab the smallest value
+            }
+            else
+            {
+            }
+        }
+
+        public (bool valueExist, Node<int>? node, Node<int>? predecessor) DoesValueExist(int valueToFind)
         {
             Node<int>? currentNode = Root;
+            Node<int>? priorNode = null;
 
             while (currentNode != null)
             {
                 if (currentNode.Data == valueToFind)
-                    return true;
+                    return (true, currentNode, priorNode);
                 else if (valueToFind <= currentNode.Data)
                 {
+                    priorNode = currentNode;
                     currentNode = currentNode.Left;
                 }
                 else
@@ -30,7 +65,7 @@ namespace Trees
                 }
             }
 
-            return false;
+            return (false, null, null);
         }
 
         public void Insert(int data)

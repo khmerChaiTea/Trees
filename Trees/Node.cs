@@ -8,7 +8,7 @@ namespace Trees
 {
     public class Node<T>
     {
-        public T Data { get; } // Auto-property for data
+        public T Data { get; set; } // Auto-property for data
         public Node<T>? Left { get; set; } // Nullable reference for the left child
         public Node<T>? Right { get; set; } // Nullable reference for the right child
 
